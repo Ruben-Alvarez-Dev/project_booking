@@ -1,35 +1,39 @@
-const express = require('express');
-const cors = require('cors');
-const mysql = require('mysql');
-const dotenv = require('dotenv');
+import express from 'express';
+import morgan from 'morgan';
+import { engine } from 'express-handlebars';
+import {join, dirname} from 'path';
+import {fileURLToPath} from 'url';
 
-dotenv.config();
-
+// Initialization
 const app = express();
-app.use(cors());
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const dbConfig = {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  port: process.env.DB_PORT
-};
 
-const pool = mysql.createPool(dbConfig);
+// Settings
+app.set('port', process.env.PORT || 3000);
+app.set('views', join(__dirname, 'views'));
+app.engine('.hbs', engine({
+    defaultLayout: 'main',
+    layoutsDir: join(app.get('views'), 'layouts'),
+    partialsDir: join(app.get('views'), 'partials'),
+    extname: '.hbs'
+}));
+app.set('view engine', '.hbs');
+    
+// Middlewares
+app.use(morgan('dev'));
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 
-app.get('/api/data', (req, res) => {
-  pool.query('SELECT * FROM people', (error, results) => {
-    if (error) {
-      console.log('Error al obtener los datos:', error);
-      res.status(500).json({ error: 'Error al obtener los datos' });
-    } else {
-      res.json(results);
-    }
-  });
+// Routes
+app.get('/', (req, res) => {
+    res.json({"message": 'Hello World'});
 });
 
-const port = 3003;
-app.listen(port, () => {
-  console.log(`Servidor backend escuchando en el puerto ${port}`);
+// Public files
+app.use(express.static(join(__dirname, 'public')));
+
+// Run server
+app.listen(app.get('port'), () => {
+  console.log('Server on port', app.get('port'));
 });
