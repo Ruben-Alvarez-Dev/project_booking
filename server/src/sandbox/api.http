@@ -16,11 +16,8 @@ Content-Type: application/json
     "year": 1999,
     "director": "The Wachowskis",
     "duration": 136,
-    "poster": "https://www.imdb.com/title/tt0133093/mediaviewer/rm4284716544",
-    "genre": [
-      "action", 
-      "sci-fi"
-    ]
+    "poster": "https://www.imdb.com/title/tt0133093/mediaviewer/rm4261863936",
+    "genre": ["Action", "Sci-Fi"]
   }
 
  
