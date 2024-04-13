@@ -1,6 +1,7 @@
 const express = require('express');
 const crypto = require('node:crypto');
 const movies = require('./movies.json');
+const z = require('zod');
 
 // Create a new Express application
 const app = express();
@@ -30,6 +31,32 @@ app.get('/movies/:id', (req, res) => {
     res.status(404).json({ message: 'Movie not found' });
 });
 app.post('/movies', (req, res) => {
+    const schema = z.objectUtil({
+        title: z.string({
+            invalid_type_error: 'Title must be a string',
+            required_error: 'Title is required'
+        }),
+        year: z.number().int().positive().min(1900).max(2024),
+        director: z.string(),
+        duration: z.number().int().positive(),
+        rate: z.number().min(0).max(10),
+        poster: z.string().url({
+            message: 'Poster must be a valid URL'
+        }),
+        genre: z.array(
+            z.enum(['Action', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Romance', 'Thriller', 'Sc']),
+            {
+                required_error: 'Genre is required',
+                invalid_type_error: 'Genre must be an array of strings',
+                invalid_enum_error: 'Invalid genre'
+            }
+        )
+        
+    })
+
+        })
+    })
+
     const {
         title,
         genre,
