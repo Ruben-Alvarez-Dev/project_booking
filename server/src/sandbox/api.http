@@ -1,3 +1,20 @@
+### All movires
+GET http://localhost:1234/movies
+
+### Getting one movie by ID
+GET http://localhost:1234/movies/1
+
+### Getting all movies by genre
+GET http://localhost:1234/movies?genre=Action
+
+
+
+
+
+
+
+
+
 ### Request
 GET http://localhost:1234/pokemon/ditto
 
