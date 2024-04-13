@@ -20,8 +20,15 @@ const schema = z.object({
   )
 });
 
-const validateMovie = (object) => {
+function validateMovie (object) {
   return schema.safeParse(object);
 };
 
-module.exports = { validateMovie };
+function validatePartialMovie (input) {
+  return schema.partial().safeParse(input);
+}
+
+module.exports = { 
+  validatePartialMovie,
+  validateMovie 
+};
