@@ -10,7 +10,7 @@ app.disable('x-powered-by');
 // Middleware
 app.use((req, res, next) => {
     if (req.method !== 'POST') return next();
-    if (req.headers['Content-Type'] !== 'application/json') return next();
+    if (req.headers['content-type'] !== 'application/json') return next();
 
     // Only arrive here POST & Content-Type: application/json
     let body = '';
@@ -23,8 +23,6 @@ app.use((req, res, next) => {
        req.body = data;
        next();
     });
-
-    next();
 })
 
 // HTTP Methods
@@ -33,15 +31,7 @@ app.get('/pokemon/ditto', (req, res) => {
 });
 
 app.post('/pokemon', (req, res) => {
-    let body = '';
-    req.on('data', chunk => {
-        body += chunk.toString();
-    });
-    req.on('end', () => {
-        const data = JSON.parse(body);
-        data.timestamp = Date.now();
-        res.status(201).json(data);
-    });
+    res.status(201).json(req.body);
 })
 
 // Error handling
