@@ -5,12 +5,25 @@ GET http://localhost:1234/movies
 GET http://localhost:1234/movies/1
 
 ### Getting all movies by genre
-GET http://localhost:1234/movies?genre=Action
+GET http://localhost:1234/movies?genre=action
 
+### Create a movie
+POST http://localhost:1234/movies
+Content-Type: application/json
+  
+  {
+    "title": "The Matrix",
+    "year": 1999,
+    "director": "The Wachowskis",
+    "duration": 136,
+    "poster": "https://www.imdb.com/title/tt0133093/mediaviewer/rm4284716544",
+    "genre": [
+      "action", 
+      "sci-fi"
+    ]
+  }
 
-
-
-
+ 
 
 
 
