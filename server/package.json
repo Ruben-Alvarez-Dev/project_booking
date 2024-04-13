@@ -25,6 +25,7 @@
     "express-myconnection": "^1.0.4",
     "fnm": "^0.0.0",
     "picocolors": "^1.0.0",
-    "promise-mysql": "^5.2.0"
+    "promise-mysql": "^5.2.0",
+    "zod": "3.22.4"
   }
 }
