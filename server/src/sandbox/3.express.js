@@ -8,7 +8,8 @@ const app = express();
 app.disable('x-powered-by');
 
 // Middleware
-app.use((req, res, next) => {
+app.use(express.json());
+/* app.use((req, res, next) => {
     if (req.method !== 'POST') return next();
     if (req.headers['content-type'] !== 'application/json') return next();
 
@@ -23,7 +24,7 @@ app.use((req, res, next) => {
        req.body = data;
        next();
     });
-})
+}) */
 
 // HTTP Methods
 app.get('/pokemon/ditto', (req, res) => {
