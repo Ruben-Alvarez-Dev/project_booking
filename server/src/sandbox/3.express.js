@@ -1,11 +1,12 @@
 const express = require('express');
+const ditto = require('./pokemon/ditto.json');
 const app = express();
 app.disable('x-powered-by');
 
 const PORT = process.env.PORT || 1234;
 
 app.get('/', (req, res) => {
-    res.json({ message: 'Home Page' });
+    res.json(ditto);
 });
 
 app.post('/pokemon', (req, res) => {
