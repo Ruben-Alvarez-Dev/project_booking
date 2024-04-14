@@ -1,15 +1,17 @@
+import './App.css';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Home } from './Home';
 
-import './App.css'
-
-function App() {
+export const App = () => {
 
   return (
     <>
-      <div className="app">
-        <h1>Front</h1>      
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
-
-export default App
